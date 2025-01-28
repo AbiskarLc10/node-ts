@@ -3,6 +3,8 @@
 
 import { AddEmailData, DeleteEmail } from "./actions/email-actions";
 
+
+
 // const GetData = <Type extends User, key extends keyof Type>(
 //   user: Type,
 //   property: key
@@ -70,6 +72,7 @@ import { AddEmailData, DeleteEmail } from "./actions/email-actions";
 //   bcc: [],
 //   body: "This is a reminder for the meeting scheduled tomorrow at 10 AM.",
 //   sentDate: "2025-01-20T09:00:00Z",
-// });
-
+// 
 DeleteEmail("21")
+
+

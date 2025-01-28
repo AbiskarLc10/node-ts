@@ -1,6 +1,6 @@
 import fs from "node:fs/promises";
 import path from "path";
-import { Email } from "../types";
+import { Email } from "../types/types";
 
 const readFileData = async (): Promise<Email[]> => {
   try {
