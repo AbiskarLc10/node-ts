@@ -1,3 +1,4 @@
+import { Dialect } from "sequelize/types";
 import { z } from "zod";
 
 export type User = {
@@ -9,7 +10,6 @@ export type User = {
   age: number;
   profileImage?: string;
 };
-
 
 export const signUpSchema = z.object({
   firstName: z.string().min(3, {
@@ -45,3 +45,13 @@ export const signInSchema = z.object({
     }),
   password: z.string(),
 });
+
+export type Environment = "development" | "test" | "production";
+
+export type DatabaseConfig = {
+  username: string;
+  password: string;
+  database: string;
+  host: string;
+  dialect: Dialect;
+};

@@ -1,6 +1,7 @@
 import express, { Express, Router } from "express";
 import { config } from "dotenv";
 import authroute from "@/route/auth-route";
+import { sequelize } from "./db/connection";
 config();
 const port = process.env.PORT; // import { Email, User, CarModel, EmailClone, Str } from "./types";
 // import emails from "./data/dummyemails.json";
@@ -82,6 +83,15 @@ const app: Express = express();
 app.use(express.json());
 app.use("/api/auth", authroute);
 
-app.listen(port, () => {
-  console.log(`Listening at port ${port}`);
-});
+sequelize
+  .authenticate()
+  .then((data) => {
+    console.log(data);
+    console.log("Connected to database successfully");
+    app.listen(port, () => {
+      console.log(`Listening at port ${port}`);
+    });
+  })
+  .catch((error) => {
+    console.log("Connection failed", error);
+  });

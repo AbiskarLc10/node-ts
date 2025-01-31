@@ -3,6 +3,6 @@ import { SignUp } from "@/actions/auth-actions";
 
 const router = Router();
 
-router.route("/auth").post(SignUp);
+router.route("/signup").post(SignUp);
 
 export default router;
