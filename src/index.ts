@@ -1,9 +1,12 @@
-// import { Email, User, CarModel, EmailClone, Str } from "./types";
+import express, { Express, Router } from "express";
+import { config } from "dotenv";
+import authroute from "@/route/auth-route";
+config();
+const port = process.env.PORT; // import { Email, User, CarModel, EmailClone, Str } from "./types";
 // import emails from "./data/dummyemails.json";
 
-import { AddEmailData, DeleteEmail } from "./actions/email-actions";
-
-
+// import { AddEmailData, DeleteEmail } from "./actions/email-actions";
+// import express,{} from "express"
 
 // const GetData = <Type extends User, key extends keyof Type>(
 //   user: Type,
@@ -72,7 +75,13 @@ import { AddEmailData, DeleteEmail } from "./actions/email-actions";
 //   bcc: [],
 //   body: "This is a reminder for the meeting scheduled tomorrow at 10 AM.",
 //   sentDate: "2025-01-20T09:00:00Z",
-// 
-DeleteEmail("21")
+//
+// DeleteEmail("21")
 
+const app: Express = express();
+app.use(express.json());
+app.use("/api/auth", authroute);
 
+app.listen(port, () => {
+  console.log(`Listening at port ${port}`);
+});
