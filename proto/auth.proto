@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package user.auth;
+
+import "./utils.proto";
+
+message RegisterUserRequest{
+    User user = 1;
+}
+
+message RegisterUserResponse {
+    string message = 1;
+    string verificationCode = 2;
+    bool success = 3;
+}
+
+message LoginUserRequest {
+    string email = 1;
+    string password = 2;
+}
+
+message LoginUserResponse {
+    User user = 1;
+    string message = 2;
+    bool success = 3;
+}
+
+message VerifyUserRequest{
+    string verificationCode = 1;
+}
+
+message VerifyUserResponse {
+    string message = 1;
+    string success = 2;
+    bool isVerified = 3;
+}
+
+service UserAuthService {
+    rpc RegisterUser (RegisterUserRequest) returns (RegisterUserResponse) {};
+    rpc VerifyUser (VerifyUserRequest) returns (VerifyUserResponse) {};
+    rpc LoginUser (LoginUserRequest) returns (LoginUserResponse) {};
+}

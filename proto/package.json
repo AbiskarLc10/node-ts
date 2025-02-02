@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "proto:auth:build":"node_modules\\.bin\\pbjs -t static-module -w commonjs -o authproto.js auth.proto utils.proto",
+    "auth:output":"node_modules\\.bin\\pbts -o ../server/src/services/auth-service/src/types/auth.d.ts authproto.js"
+  },
+  "dependencies": {
+    "protobufjs-cli": "^1.1.3"
+  }
+}

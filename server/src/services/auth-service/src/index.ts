@@ -1,0 +1,22 @@
+import * as grpc from "@grpc/grpc-js";
+import * as protoloader from "@grpc/proto-loader";
+import path from "path";
+import {
+  AUTH_HOST_URL,
+  AUTH_PROTO_PATH,
+  PROTO_LOADER_OPTIONS,
+} from "@config/protoconfig";
+
+const authProtoPath = path.resolve(AUTH_PROTO_PATH);
+console.log(authProtoPath)
+const packageDefinations: protoloader.PackageDefinition = protoloader.loadSync(
+  authProtoPath,
+  PROTO_LOADER_OPTIONS
+);
+
+const authProto = grpc.loadPackageDefinition(packageDefinations);
+
+console.log(authProto)
+const authServer: grpc.Server = new grpc.Server();
+
+
