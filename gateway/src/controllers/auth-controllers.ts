@@ -1,13 +1,11 @@
 import { Request, Response, NextFunction } from "express";
 import { ExpressError } from "@/errors/errorTypes";
-import { signUpSchema, User } from "@/types/types";
-import { validate } from "@/utils/validate";
 
 export async function SignUp(
   req: Request,
   res: Response,
   next: NextFunction
-): Promise<any>  {
+): Promise<any> {
   try {
     const {
       firstName,
@@ -17,9 +15,9 @@ export async function SignUp(
       password,
       age,
       profileImage,
-    }: User = req.body;
-
-    validate(signUpSchema, req.body);
+      citizenShipFront,
+      citizenShipBack,
+    } = req.body;
 
     return res.status(200).json({
       message: "Hello",

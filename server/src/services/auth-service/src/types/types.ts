@@ -3,18 +3,23 @@ import { z } from "zod";
 
 export type User = {
   firstName: string;
+  midName: string;
   lastName: string;
+  age: number;
+  gender: "male" | "female" | "others";
   email: string;
   password: string;
   address: string;
-  age: number;
   profileImage?: string;
+  citizenShipFront: string;
+  citizenShipBack: string;
 };
 
 export const signUpSchema = z.object({
   firstName: z.string().min(3, {
     message: "firstName must be at least 3 characters",
   }),
+  midName: z.string().optional(),
   lastName: z.string().min(3, {
     message: "Last name must be at least 3 characters",
   }),
@@ -23,6 +28,9 @@ export const signUpSchema = z.object({
     .int("Age must be an integer")
     .min(16, "Age must be at least 16")
     .max(99, "Age cannot exceed 99"),
+  gender: z.enum(["male", "female", "others"], {
+    message: "Select you gender",
+  }),
   email: z
     .string()
     .regex(new RegExp("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"), {
@@ -34,7 +42,12 @@ export const signUpSchema = z.object({
       message:
         "Password must have an uppercase letter,a digit and an special character",
     }),
+  contact: z.string().regex(new RegExp("(?=98|97|96[d]).{10}"), {
+    message: "Not a valid number",
+  }),
   profileImage: z.string({ message: "Please select profile Image" }).optional(),
+  citizenShipFront: z.string({ message: "Please upload citizenship front" }),
+  citizenShipBack: z.string({ message: "Please upload citizenship back" }),
 });
 
 export const signInSchema = z.object({

@@ -1,4 +1,3 @@
-import { signInSchema, signUpSchema } from "@/types/types";
 import { ZodError, ZodSchema } from "zod";
 
 export const validate = (schema: ZodSchema, data: object) => {

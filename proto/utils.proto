@@ -1,0 +1,112 @@
+syntax = "proto3";
+
+package common;
+
+
+enum Gender {
+  MALE = 0;
+  FEMALE = 1;
+  OTHERS = 2;
+}
+
+enum Status {
+  PENDING = 0;
+  INPROGRESS = 1;
+  RESOLVED = 2;
+}
+
+enum Priority {
+  LOW = 0;
+  MEDIUM = 1;
+  HIGH = 2;
+}
+
+enum FileType {
+  IMAGE = 0;
+  VIDEO = 1;
+}
+
+enum InfraType {
+  ROAD = 0;
+  BRIDGE = 1;
+  PARK = 2;
+  SCHOOL = 3;
+  OTHER = 4;
+}
+
+
+message User {
+  string id = 1;
+  string firstName = 2;
+  string midName = 3;  
+  string lastName = 4;
+  Gender gender = 5;
+  int32 age = 6;
+  string contact = 7;
+  string email = 8;
+  string password = 9;
+  string profileImage = 10;
+  bool isAdmin = 11;
+  bool isVerified = 12;
+  string verificationCode = 13;
+  string citizenShipFront = 14;
+  string citizenShipBack = 15;
+}
+
+
+message Infrastructure {
+  string id = 1;
+  string name = 2;
+  InfraType type = 3;
+  string details = 4;  
+  string createdAt = 5;
+  string updatedAt = 6;
+}
+
+message Report {
+  string id = 1;
+  string title = 2;
+  string description = 3;
+  Status status = 4;
+  Priority priority = 5;
+  string userId = 6;
+  User user = 7; 
+  string infrastructureId = 8;
+  Infrastructure infrastructure = 9;  
+  string locationId = 10;
+  Location location = 11;  
+  repeated Comment comments = 12;
+  repeated Media media = 13;
+  string createdAt = 14;
+  string updatedAt = 15;
+}
+
+message Location {
+  string id = 1;
+  double latitude = 2;
+  double longitude = 3;
+  string address = 4;  
+  repeated Report reports = 5;
+  string createdAt = 6;
+  string updatedAt = 7;
+}
+
+message Comment {
+  string id = 1;
+  string content = 2;
+  string reportId = 3;
+  Report report = 4; 
+  string userId = 5;
+  User user = 6;  
+  string createdAt = 7;
+  string updatedAt = 8;
+}
+
+message Media {
+  string id = 1;
+  string fileUrl = 2;
+  FileType fileType = 3;
+  string reportId = 4;
+  Report report = 5;  
+  string createdAt = 6;
+}
