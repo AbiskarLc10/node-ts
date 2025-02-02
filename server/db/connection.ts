@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize";
-import config from "@/config/database.json";
-import { DatabaseConfig, Environment } from "@/types/types";
+import config from "../config/database.json";
+import { DatabaseConfig, Environment } from "../types/types";
 
 const environment: Environment =
   (process.env.NODE_ENV as Environment) || "development";
@@ -16,5 +16,3 @@ export const sequelize = new Sequelize(
     host: configOptions.host,
   }
 );
-
-

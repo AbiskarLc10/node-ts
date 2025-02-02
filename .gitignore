@@ -1,1 +1,30 @@
+# Dependency directories
 node_modules/
+
+# Compiled output (for TypeScript)
+dist/
+
+# .env file (environment variables, typically containing secrets)
+.env
+
+# Sequelize generated folders (like migrations)
+sequelize-cli-config.js
+
+# Logs
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+*.log
+
+# OS-specific files
+.DS_Store  # macOS
+Thumbs.db  # Windows
+
+# IDE-specific files (like Visual Studio Code)
+.vscode/
+
+# TypeScript specific files
+*.tsbuildinfo
+
+# Optional: Test and coverage reports
+coverage/
