@@ -1,23 +1,17 @@
 export type CustomErrorContent = {
-    message: string;
-    details?: string;
-    statusCode: number;
-  };
-  
-  export class ExpressError extends Error {
-    statusCode: number;
-    details?: string;
-  
-    constructor(
-      message: string, 
-      statusCode: number, 
-      details?: string
-    ) {
-      super(message);
-      this.name = this.constructor.name; 
-      this.statusCode = statusCode;
-      this.details = details;
-  
-    }
+  message: string;
+  details?: string;
+  code: number;
+};
+
+export class ExpressError extends Error {
+  code: number;
+  details?: string;
+
+  constructor(message: string, code: number, details?: string) {
+    super(message);
+    this.name = this.constructor.name;
+    this.code = code;
+    this.details = details;
   }
-  
+}

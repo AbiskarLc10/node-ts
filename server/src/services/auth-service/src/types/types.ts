@@ -12,6 +12,9 @@ export type User = {
   password: string;
   address: string;
   profileImage?: string;
+  isAdmin: boolean;
+  isVerified: boolean;
+  verificationCode: string;
   citizenShipFront: string;
   citizenShipBack: string;
 };
@@ -29,7 +32,7 @@ export const signUpSchema = z.object({
     .int("Age must be an integer")
     .min(16, "Age must be at least 16")
     .max(99, "Age cannot exceed 99"),
-  gender: z.enum(["male", "female", "others"], {
+  gender: z.enum(["MALE", "FEMALE", "OTHERS"], {
     message: "Select you gender",
   }),
   email: z

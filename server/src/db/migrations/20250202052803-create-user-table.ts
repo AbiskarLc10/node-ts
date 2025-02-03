@@ -22,8 +22,19 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      midName: {
+        type: Sequelize.STRING,
+      },
       lastName: {
         type: Sequelize.STRING,
+        allowNull: false,
+      },
+      gender: {
+        type: Sequelize.ENUM("MALE", "FEMALE", "OTHERS"),
+        allowNull: false,
+      },
+      age: {
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
       email: {
@@ -34,13 +45,38 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      contact: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       profileImage: {
         type: Sequelize.STRING,
+      },
+      citizenShipFront: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      citizenShipBack: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       isAdmin: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
         defaultValue: false,
+      },
+      isVerified: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
+      verificationCode: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      verificationCodeExpiry: {
+        type: Sequelize.DATE,
+        allowNull: false,
       },
       createdAt: {
         type: Sequelize.DATE,

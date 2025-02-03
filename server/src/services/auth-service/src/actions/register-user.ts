@@ -1,6 +1,11 @@
 import * as grpc from "@grpc/grpc-js";
 import { user } from "@/types/auth";
-
+import { sequelize } from "@db/connection";
+import { validate } from "@/utils/validate";
+import { signUpSchema, User } from "@/types/types";
+import bcrypt from "bcrypt";
+import { QueryTypes } from "sequelize";
+import { v4 as uuidv4 } from "uuid";
 export async function RegisterUser(
   call: grpc.ServerUnaryCall<
     user.auth.RegisterUserRequest,
@@ -8,15 +13,71 @@ export async function RegisterUser(
   >,
   callback: grpc.sendUnaryData<user.auth.RegisterUserResponse>
 ): Promise<void> {
+  const transaction = await sequelize.transaction();
   try {
     const { user } = call.request;
 
-    console.log(user);
+    validate(signUpSchema, user as object);
 
+    const [checkUserExists, _]: [User[], any] = (await sequelize.query(
+      "SELECT * FROM users WHERE email=:email",
+      {
+        replacements: {
+          email: user?.email,
+        },
+        raw: true,
+        type: QueryTypes.SELECT,
+      }
+    )) as [User[], any];
+
+    let newUser;
+    const hashedPassword = await bcrypt.hash(user?.password as string, 10);
+    const verificationCode = Math.floor(
+      100000 + Math.random() * 100000
+    ).toString();
+    const verificationCodeExpiry = new Date(Date.now() + 3600000);
+    if (checkUserExists && checkUserExists.length === 1) {
+      if (checkUserExists[0].isVerified) {
+        return callback({
+          details: "User already verified proceed to login",
+          code: grpc.status.ALREADY_EXISTS,
+        });
+      } else {
+        newUser = await sequelize.query(
+          "UPDATE users SET password= :password,verificationCode=:verificationCode,verificationCodeExpiry=:verificationCodeExpiry WHERE email=:email",
+          {
+            raw: true,
+            replacements: {
+              password: hashedPassword,
+              verificationCode: verificationCode,
+              verificationCodeExpiry: verificationCodeExpiry,
+            },
+            transaction: transaction,
+          }
+        );
+      }
+    } else {
+      newUser = await sequelize.query(
+        "INSERT INTO users (id,firstName,midName,lastName,gender,age,email,password,contact,profileImage,citizenShipFront,citizenShipBack,verificationCode,verificationCodeExpiry,createdAt,updatedAt) VALUES (:id,:firstName,:midName,:lastName,:gender,:age,:email,:password,:contact,:profileImage,:citizenShipFront,:citizenShipBack,:verificationCode,:verificationCodeExpiry,:createdAt,:updatedAt);",
+        {
+          replacements: {
+            id: uuidv4(),
+            ...user,
+            password: hashedPassword,
+            verificationCode: verificationCode,
+            verificationCodeExpiry: verificationCodeExpiry,
+          },
+          transaction: transaction,
+        }
+      );
+    }
+
+    console.log(newUser);
+    await transaction.rollback();
     return callback(null, {
-      message: "Data retrieved successfully",
+      message: "user registered successfully",
       success: true,
-      verificationCode: "201982",
+      verificationCode: verificationCode,
       toJSON() {
         return {
           message: this.message,
@@ -25,8 +86,12 @@ export async function RegisterUser(
         };
       },
     });
-  } catch (error) {
+  } catch (error: any) {
     console.log(error);
-    return;
+    return callback({
+      details: error.details,
+      message: error.message,
+      code: grpc.status.INTERNAL,
+    });
   }
 }

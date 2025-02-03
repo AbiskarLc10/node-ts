@@ -11,6 +11,7 @@
   "type": "commonjs",
   "description": "",
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "sequelize-cli": "^6.6.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.3"
@@ -18,7 +19,9 @@
   "dependencies": {
     "@grpc/grpc-js": "^1.12.5",
     "@grpc/proto-loader": "^0.7.13",
+    "bcrypt": "^5.1.1",
     "sequelize": "^6.37.5",
+    "uuid": "^11.0.5",
     "zod": "^3.24.1"
   }
 }
