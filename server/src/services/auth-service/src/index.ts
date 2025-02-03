@@ -6,9 +6,12 @@ import {
   AUTH_PROTO_PATH,
   PROTO_LOADER_OPTIONS,
 } from "@config/protoconfig";
+import { user } from "@/types/auth";
+import { RegisterUser } from "./actions/register-user";
 
 const authProtoPath = path.resolve(AUTH_PROTO_PATH);
-console.log(authProtoPath)
+
+console.log(authProtoPath);
 const packageDefinations: protoloader.PackageDefinition = protoloader.loadSync(
   authProtoPath,
   PROTO_LOADER_OPTIONS
@@ -16,7 +19,27 @@ const packageDefinations: protoloader.PackageDefinition = protoloader.loadSync(
 
 const authProto = grpc.loadPackageDefinition(packageDefinations);
 
-console.log(authProto)
+//@ts-ignore
+const UserAuthService: grpc.ServiceDefinition =authProto.user.auth.UserAuthService.service;
+
+console.log(authProto);
+
 const authServer: grpc.Server = new grpc.Server();
 
+authServer.addService(UserAuthService, {
+  RegisterUser,
+});
 
+export const startAuthServer = () => {
+  authServer.bindAsync(
+    AUTH_HOST_URL,
+    grpc.ServerCredentials.createInsecure(),
+    (error, port) => {
+      if (error) {
+        return console.log(`Failed to create grpc server =>  `, error.message);
+      } else {
+        console.log(`Author Server Listening at port ${port}`);
+      }
+    }
+  );
+};
