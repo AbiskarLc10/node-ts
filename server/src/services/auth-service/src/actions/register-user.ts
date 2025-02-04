@@ -13,12 +13,13 @@ export async function RegisterUser(
   >,
   callback: grpc.sendUnaryData<user.auth.RegisterUserResponse>
 ): Promise<void> {
-  const transaction = await sequelize.transaction();
   try {
     const { user } = call.request;
 
     validate(signUpSchema, user as object);
 
+    const testId = uuidv4();
+    console.log(testId);
     const [checkUserExists, _]: [User[], any] = (await sequelize.query(
       "SELECT * FROM users WHERE email=:email",
       {
@@ -52,7 +53,6 @@ export async function RegisterUser(
               verificationCode: verificationCode,
               verificationCodeExpiry: verificationCodeExpiry,
             },
-            transaction: transaction,
           }
         );
       }
@@ -61,19 +61,20 @@ export async function RegisterUser(
         "INSERT INTO users (id,firstName,midName,lastName,gender,age,email,password,contact,profileImage,citizenShipFront,citizenShipBack,verificationCode,verificationCodeExpiry,createdAt,updatedAt) VALUES (:id,:firstName,:midName,:lastName,:gender,:age,:email,:password,:contact,:profileImage,:citizenShipFront,:citizenShipBack,:verificationCode,:verificationCodeExpiry,:createdAt,:updatedAt);",
         {
           replacements: {
-            id: uuidv4(),
             ...user,
+            id: uuidv4(),
             password: hashedPassword,
             verificationCode: verificationCode,
             verificationCodeExpiry: verificationCodeExpiry,
+            createdAt: new Date(),
+            updatedAt: new Date(),
           },
-          transaction: transaction,
         }
       );
     }
 
     console.log(newUser);
-    await transaction.rollback();
+
     return callback(null, {
       message: "user registered successfully",
       success: true,

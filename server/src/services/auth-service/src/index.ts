@@ -8,6 +8,7 @@ import {
 } from "@config/protoconfig";
 import { user } from "@/types/auth";
 import { RegisterUser } from "./actions/register-user";
+import { VerifyUser } from "./actions/verify-user";
 
 const authProtoPath = path.resolve(AUTH_PROTO_PATH);
 
@@ -28,6 +29,7 @@ const authServer: grpc.Server = new grpc.Server();
 
 authServer.addService(UserAuthService, {
   RegisterUser,
+  VerifyUser
 });
 
 export const startAuthServer = () => {

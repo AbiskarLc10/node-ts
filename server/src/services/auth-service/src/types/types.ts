@@ -17,6 +17,7 @@ export type User = {
   verificationCode: string;
   citizenShipFront: string;
   citizenShipBack: string;
+  verificationCodeExpiry: Date;
 };
 
 export const signUpSchema = z.object({
@@ -72,4 +73,3 @@ export type DatabaseConfig = {
   host: string;
   dialect: Dialect;
 };
-
