@@ -6,7 +6,6 @@ import {
   AUTH_PROTO_PATH,
   PROTO_LOADER_OPTIONS,
 } from "@config/protoconfig";
-import { user } from "@/types/auth";
 import { RegisterUser } from "./actions/register-user";
 import { VerifyUser } from "./actions/verify-user";
 
