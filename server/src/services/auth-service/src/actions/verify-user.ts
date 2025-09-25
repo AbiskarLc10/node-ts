@@ -1,8 +1,8 @@
 import * as grpc from "@grpc/grpc-js";
-import { user } from "@/types/auth";
+import { user } from "@auth/types/auth";
 import { sequelize } from "@db/connection";
 import { QueryTypes } from "sequelize";
-import { User } from "@/types/types";
+import { User } from "@auth/types/types";
 
 export async function VerifyUser(
   call: grpc.ServerUnaryCall<
@@ -34,6 +34,7 @@ export async function VerifyUser(
       }
     )) as [User, any];
 
+    console.log(userToBeVerified);
     if (!userToBeVerified) {
       return callback({
         details: "User does not exists.Please Sign Up",
@@ -46,6 +47,8 @@ export async function VerifyUser(
         code: grpc.status.ALREADY_EXISTS,
       });
     } else {
+      console.log(userToBeVerified.verificationCodeExpiry);
+      console.log(new Date());
       if (userToBeVerified.verificationCodeExpiry < new Date()) {
         return callback({
           details: "Verification code expired",
@@ -62,7 +65,7 @@ export async function VerifyUser(
         });
       } else {
         return callback({
-          details: "Invalied verification code",
+          details: "Invalid verification code",
           code: grpc.status.PERMISSION_DENIED,
         });
       }

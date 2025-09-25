@@ -5,9 +5,10 @@ import {
   AUTH_HOST_URL,
   AUTH_PROTO_PATH,
   PROTO_LOADER_OPTIONS,
-} from "@config/protoconfig";
+} from "src/shared/config/protoconfig";
 import { RegisterUser } from "./actions/register-user";
 import { VerifyUser } from "./actions/verify-user";
+import { LoginUser } from "./actions/login-user";
 
 const authProtoPath = path.resolve(AUTH_PROTO_PATH);
 
@@ -20,7 +21,7 @@ const packageDefinations: protoloader.PackageDefinition = protoloader.loadSync(
 const authProto = grpc.loadPackageDefinition(packageDefinations);
 
 //@ts-ignore
-const UserAuthService: grpc.ServiceDefinition =authProto.user.auth.UserAuthService.service;
+const UserAuthService: grpc.ServiceDefinition = authProto.user.auth.UserAuthService.service;
 
 console.log(authProto);
 
@@ -28,7 +29,8 @@ const authServer: grpc.Server = new grpc.Server();
 
 authServer.addService(UserAuthService, {
   RegisterUser,
-  VerifyUser
+  VerifyUser,
+  LoginUser,
 });
 
 export const startAuthServer = () => {

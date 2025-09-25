@@ -1,20 +1,18 @@
 {
+  "extends":"../../../tsconfig.options.json",
   "compilerOptions": {
-    "target": "es2020",
-    "module": "commonjs", 
-    "rootDir": "../../../",
-    "moduleResolution": "node10",
-    "baseUrl": "../../../",
+    "rootDir": "./src",
+    "baseUrl": "./",
+    "outDir": "./dist",
     "paths": {
-      "@/*": ["src/services/auth-service/src/*"],
-      "@config/*": ["config/*"],
-      "@db/*":["src/db/*"]
-    },          
-    "resolveJsonModule": true ,                  /* Only output d.ts files and not JavaScript files. */
-    "sourceMap": false,                                /* Create source map files for emitted JavaScript files. */            /* Allow 'import x from y' when a module doesn't have a default export. */
-    "esModuleInterop": true,                    /* Disable resolving symlinks to their realpath. This correlates to the same flag in node. */
-    /* Type Checking */
-    "strict": true ,
-    "skipLibCheck": true 
-  }
+      "@auth/*": ["./src/*","./dist/*"],
+      "@config/*": ["../../shared/config/*"],
+      "@db/*":["../../shared/db/*"]
+    },
+  },
+  "references": [
+    {
+      "path": "../../shared"
+    }
+  ]
 }

@@ -7,7 +7,7 @@ export type User = {
   midName: string;
   lastName: string;
   age: number;
-  gender: "male" | "female" | "others";
+  gender: "MALE" | "FEMALE" | "OTHERS";
   email: string;
   password: string;
   address: string;
@@ -64,12 +64,3 @@ export const signInSchema = z.object({
   password: z.string(),
 });
 
-export type Environment = "development" | "test" | "production";
-
-export type DatabaseConfig = {
-  username: string;
-  password: string;
-  database: string;
-  host: string;
-  dialect: Dialect;
-};

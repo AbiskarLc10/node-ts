@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "composite": true,
+        "module": "commonjs",
+        "allowJs": false,
+        "declarationMap": false,
+        "declaration": true,
+        "esModuleInterop": true,
+        "checkJs": false,
+        "moduleResolution": "node10",
+        "strict": true,
+        "sourceMap": false,
+        "target": "es2020",
+        "resolveJsonModule": true
+    },
+    "exclude": ["node_modules","dist"]
+}

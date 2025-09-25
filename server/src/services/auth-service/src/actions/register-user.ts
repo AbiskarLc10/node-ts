@@ -1,8 +1,8 @@
 import * as grpc from "@grpc/grpc-js";
-import { user } from "@/types/auth";
+import { user } from "@auth/types/auth";
 import { sequelize } from "@db/connection";
-import { validate } from "@/utils/validate";
-import { signUpSchema, User } from "@/types/types";
+import { validate } from "@auth/utils/validate";
+import { signUpSchema, User } from "@auth/types/types";
 import bcrypt from "bcrypt";
 import { QueryTypes } from "sequelize";
 import { v4 as uuidv4 } from "uuid";
