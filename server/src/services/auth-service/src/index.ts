@@ -5,7 +5,7 @@ import {
   AUTH_HOST_URL,
   AUTH_PROTO_PATH,
   PROTO_LOADER_OPTIONS,
-} from "src/shared/config/protoconfig";
+} from "@config/protoconfig";
 import { RegisterUser } from "./actions/register-user";
 import { VerifyUser } from "./actions/verify-user";
 import { LoginUser } from "./actions/login-user";

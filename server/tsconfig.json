@@ -2,12 +2,16 @@
   "extends":"./tsconfig.options.json",
   "compilerOptions": {
     "baseUrl": ".",
+    "rootDir": "./src",
+    "outDir": "./dist",
     "paths": {
-      "@auth/*": ["src/services/auth-service/src/*"],
-      "@config/*": ["src/shared/config/*"],
-      "@db/*": ["src/shared/db/*"]
+      "@auth/*": ["./src/services/auth-service/src/*"],
+      "@config/*": ["./src/shared/config/*"],
+      "@db/*": ["./src/shared/db/*"]
     },
+    "tsBuildInfoFile": "dist/.tsbuildinfo"
   },
+  "files": ["./src/index.ts"],
   "references": [
     {
       "path": "./src/shared"

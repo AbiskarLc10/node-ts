@@ -9,7 +9,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "ts-node -r tsconfig-paths/register src/index.ts",
-    "link:alias":"link-module-alias"
+    "link:alias": "link-module-alias"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.12.5",
@@ -18,18 +18,17 @@
     "link-module-alias": "^1.2.0",
     "mysql2": "^3.12.0",
     "sequelize": "^6.37.5",
-    "sequelize-cli-ts-js": "^1.1.2",
     "tsconfig-paths": "^4.2.0",
     "zod": "^3.24.1"
   },
   "devDependencies": {
-    "sequelize-cli": "^6.6.2",
+    "sequelize-cli-ts-js": "^1.1.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.3"
   },
   "_moduleAliases": {
-     "@auth":"src/services/auth-service/src",
-     "@config":"config",
-     "@db":"src/db"
+    "@auth": "src/services/auth-service/src",
+    "@config": "config",
+    "@db": "src/db"
   }
 }
