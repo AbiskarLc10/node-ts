@@ -1,4 +1,4 @@
-import { AUTH_HOST_URL } from "src/shared/config/protoconfig";
+import { AUTH_HOST_URL } from "./shared/config/protoconfig";
 import dotenv from 'dotenv';
 dotenv.config()
 import { sequelize } from "./shared/db/connection";

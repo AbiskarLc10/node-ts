@@ -6,6 +6,8 @@
         "outDir": "./dist",
         "paths": {
             "@config/*":["./config/*"]
-        }
-    }
+        },
+        "tsBuildInfoFile": "dist/.tsbuildinfo"
+    },
+    "include": ["./config/**/*","./db/**/*"]
 }

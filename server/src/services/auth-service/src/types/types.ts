@@ -1,5 +1,3 @@
-import { GrpcObject } from "@grpc/grpc-js";
-import { Dialect } from "sequelize/types";
 import { z } from "zod";
 
 export type User = {

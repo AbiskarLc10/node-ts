@@ -9,7 +9,9 @@
       "@config/*": ["../../shared/config/*"],
       "@db/*":["../../shared/db/*"]
     },
+    "tsBuildInfoFile": "dist/.tsbuildinfo"
   },
+  "exclude": ["src/types/auth.d.ts","dist"],
   "references": [
     {
       "path": "../../shared"
