@@ -5,5 +5,6 @@ jobs:
     First-job:
         runs-on: ubuntu-latest
         steps:
-        - name: Debug secret safely
-          run: ./test.sh
+             - uses: actions/checkout@v5
+             - name: Debug secret safely
+               run: ./test.sh
