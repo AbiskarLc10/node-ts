@@ -6,8 +6,4 @@ jobs:
         runs-on: ubuntu-latest
         steps:
         - name: Debug secret safely
-          env:
-              USERNAME: ${{ secrets.USERNAME }}
-          run: |
-              echo "Length of USERNAME: ${#USERNAME}"
-              echo "$USERNAME" | sha256sum
+          run: ./test.sh
