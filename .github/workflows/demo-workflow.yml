@@ -7,4 +7,6 @@ jobs:
         steps:
              - uses: actions/checkout@v5
              - name: Debug secret safely
-               run: ./test.sh
+               run: |
+                   chmod +x ./test.sh
+                   ./test.sh
