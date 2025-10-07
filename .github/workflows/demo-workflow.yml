@@ -6,7 +6,9 @@ jobs:
         runs-on: ubuntu-latest
         steps:
         - name: Using secrets
+          env:
+            USERNAME: ${{ secrets.USERNAME }}
           run: |
             echo "Testing inside ubuntu"
-            echo ${{secrets.USERNAME}}
+            echo $USERNAME
             
