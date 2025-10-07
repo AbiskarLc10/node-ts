@@ -5,6 +5,8 @@ jobs:
     First-job:
         runs-on: ubuntu-latest
         steps:
-            - run: |
-                echo "Testing inside ubuntu"
+        - name: Using secrets
+          run: |
+            echo "Testing inside ubuntu"
+            echo ${{secrets.USERNAME}}
             
