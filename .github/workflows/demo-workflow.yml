@@ -5,11 +5,9 @@ jobs:
     First-job:
         runs-on: ubuntu-latest
         steps:
-        - name: Using secrets
+        - name: Debug secret safely
           env:
-            USERNAME: ${{ secrets.USERNAME }}
-            EMAIL: "abinjr08@gmail.com"
+              USERNAME: ${{ secrets.USERNAME }}
           run: |
-            echo "Testing inside ubuntu ${EMAIL}"
-            echo "${USERNAME}_12"
-            
+              echo "Length of USERNAME: ${#USERNAME}"
+              echo "$USERNAME" | sha256sum
