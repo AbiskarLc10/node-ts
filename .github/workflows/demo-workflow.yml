@@ -8,7 +8,8 @@ jobs:
         - name: Using secrets
           env:
             USERNAME: ${{ secrets.USERNAME }}
+            EMAIL: "abinjr08@gmail.com"
           run: |
-            echo "Testing inside ubuntu"
-            echo $USERNAME
+            echo "Testing inside ubuntu ${EMAIL}"
+            echo "${USERNAME}_12"
             
