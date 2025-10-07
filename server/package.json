@@ -9,7 +9,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "ts-node -r tsconfig-paths/register src/index.ts",
-    "link:alias": "link-module-alias"
+    "link:alias": "link-module-alias",
+    "build": "npx tsc --build && npm run link:alias"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.12.5",
@@ -27,8 +28,8 @@
     "typescript": "^5.7.3"
   },
   "_moduleAliases": {
-    "@auth": "src/services/auth-service/src",
-    "@config": "config",
-    "@db": "src/db"
+    "@auth": "src/services/auth-service/dist",
+    "@config": "src/shared/dist/config",
+    "@db": "src/shared/dist/db"
   }
 }

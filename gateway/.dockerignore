@@ -1,0 +1,12 @@
+dist
+node_modules
+*.log
+.env
+# Ignore Docker-related files
+Dockerfile*
+.dockerignore
+
+# Ignore build artifacts and temporary files
+/build
+*.tmp
+*~
