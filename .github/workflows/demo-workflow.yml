@@ -1,0 +1,11 @@
+name: Test Actions 
+run-name: Abiskar is running workflows
+on: [push]
+jobs:
+    First-job:
+        runs-on: ubuntu-latest
+        steps:
+            - run: |
+                apt-get update
+                echo "Testing inside ubuntu"
+            

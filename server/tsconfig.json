@@ -7,7 +7,7 @@
     "paths": {
       "@auth/*": ["./src/services/auth-service/src/*"],
       "@config/*": ["./src/shared/config/*"],
-      "@db/*": ["./src/shared/db/*"]
+      "@db/*": ["./src/shared/db/*"],
     },
     "tsBuildInfoFile": "dist/.tsbuildinfo"
   },
